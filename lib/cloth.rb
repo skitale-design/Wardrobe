@@ -28,7 +28,8 @@ class Cloth
     temp = @temperature_range.gsub(/[( )]/,'').split(',')
     puts "temp = #{temp}"
     puts "temperature = #{temperature}"
-    puts "(temp[0].to_i..temp[1].to_i).include?(temperature) = #{(temp[0].to_i..temp[1].to_i).include?(temperature)}"
+    puts "(temp[0].to_i..temp[1].to_i).include?(temperature) = #{(temp[0].to_i..temp[1].to_i).include?(temperature.to_i)}"
+    # puts "(10..25).include?(temperature) = #{(10..25).include?(temperature)}"
     # if temperature
   end
 
