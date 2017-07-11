@@ -1,14 +1,28 @@
-require_relative 'wardrobe'
+require_relative 'cloth'
 
 class Clothes
 
   def initialize(temperature, path)
     @temperature = temperature
-    clothes_array = Wardrobe.new(path)
+    read_from_files(path)
   end
 
   def set_for_temperature
 
+  end
+
+  def read_from_files(path)
+    clothes_array = []
+    Dir.glob("#{path}/*.txt") do |file|
+      puts "file = #{file}" # ---------- test
+      # для каждого файла создаем отдельный экземпляр класса Cloth
+      if !File.zero?(file) # проверка, что в файле есть текст
+        cloth = Cloth.new(file)
+      end
+      # Набираем в массив все шмотки
+      # puts "cloth.name = #{cloth.name}" # ---------- test
+      clothes_array << cloth
+    end
   end
 
 end
