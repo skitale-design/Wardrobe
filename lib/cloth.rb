@@ -2,8 +2,9 @@ class Cloth
 
   attr_reader :name, :type, :temperature_range
 
-  def initialize(path)
+  def initialize(temperature, path)
     read_from_files(path)
+    temperature_fits?(temperature)
   end
 
 
@@ -23,6 +24,13 @@ class Cloth
         puts "@temperature_range = #{@temperature_range}" # ------------ test
   end
 
+  def temperature_fits?(temperature)
+    temp = @temperature_range.gsub(/[( )]/,'').split(',')
+    puts "temp = #{temp}"
+    puts "temperature = #{temperature}"
+    puts "(temp[0].to_i..temp[1].to_i).include?(temperature) = #{(temp[0].to_i..temp[1].to_i).include?(temperature)}"
+    # if temperature
+  end
 
 end
 
