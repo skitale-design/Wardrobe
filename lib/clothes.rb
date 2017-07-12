@@ -9,7 +9,7 @@ attr_reader :type_list
     @wardrobe = []
     @fits_the_weather = []
     @appropriate_types = []
-    read_from_files(temperature, path)
+    read_from_files(path)
     select_for_temperature(temperature)
     # Пересечение множества всех типов оджеды с множеством подходящих типов оджеды
     @type_list = type_list_method & @appropriate_types
@@ -26,7 +26,7 @@ attr_reader :type_list
       end
   end
 
-  # Список всех типов, которые вообще встречаются (строка 2 в файле)
+  # Список всех типов, которые вообще встречаются (строка 2 в txt-файле)
   def type_list_method
     type_array = []
     # Перебираем весь шкаф
@@ -39,7 +39,7 @@ attr_reader :type_list
   end
 
   # Получить случайный элемент одежды указанного типа
-  def random_cloth_by(type)
+  def random_cloth(type)
     cloth_array = []
     @fits_the_weather.each do |item|
       cloth_array << item if item.type == type

@@ -19,7 +19,7 @@ loop do # Цикл для удобства тестирования - для в�
   clothes = Clothes.new(user_input, path_to_data)
   puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
   clothes.type_list.each do |item|
-      puts "#{item}: #{clothes.random_cloth_by(item).name}"
+      puts "#{item}: #{clothes.random_cloth(item).name}  (#{clothes.random_cloth(item).temperature_range})"
   end
   puts "\n---------------------"
   break if user_input == 111
