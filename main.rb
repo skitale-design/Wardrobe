@@ -21,8 +21,8 @@ loop do
   cloth = Clothes.new(user_input, path_to_data)
   puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
   puts "Головной убор: #{cloth.hats.sample}"
-  puts "Одежда: #{cloth.jackets.sample}"
-  puts "Обувь: #{cloth.shooses.sample}"
+  puts "Одежда: #{cloth.overclothes.sample}"
+  puts "Обувь: #{cloth.shoes.sample}"
   puts
   break if user_input == 111
 end
