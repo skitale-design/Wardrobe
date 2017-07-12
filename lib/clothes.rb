@@ -16,9 +16,13 @@ attr_reader :temperature, :hat_array, :jacket_array, :shoose_array
   def set_for_temperature(temperature)
       @clothes_array.each do |item|
         # @hat_array << item.name
-        @hat_array << item.name if (item.temperature_fits?(temperature) && item.type == "Головной убор")
-        @jacket_array << item.name if (item.temperature_fits?(temperature) && item.type == "Одежда")
-        @shoose_array << item.name if (item.temperature_fits?(temperature) && item.type == "Обувь")
+        if item.temperature_fits?(temperature)
+          case item.type
+          when "Головной убор" then @hat_array << item.name
+          when "Одежда"  then @jacket_array << item.name
+          when "Обувь" then @shoose_array << item.name
+          end
+        end
         # puts "------------- TEST ------------------"
         # puts "Cloth:: item.type = #{item.type}" # ---------- test
         # puts "Cloth:: item.temperature_fits?(temperature) = #{item.temperature_fits?(temperature)}" # ---------- test

@@ -12,12 +12,14 @@ end
 require_relative 'lib/clothes'
 
 path_to_data = "./data"
+# Для выхода из цикла набрать "111"
 loop do
-print "Сейчас градусов на улице: "
-user_input = STDIN.gets.to_i
+  puts "Для выхода из цикла набрать \"111\""
+  print "Сейчас градусов на улице: "
+  user_input = STDIN.gets.to_i
   # Создаем экземпляр класса "Clothes"
   cloth = Clothes.new(user_input, path_to_data)
-  puts "Сегодня #{user_input} Предлагаю надеть сегодня:"
+  puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
   puts "Головной убор: #{cloth.hat_array.sample}"
   puts "Одежда: #{cloth.jacket_array.sample}"
   puts "Обувь: #{cloth.shoose_array.sample}"
