@@ -11,8 +11,11 @@ class Cloth
     cloth = file.readlines
     file.close
     @name = cloth[0].chomp
+    # puts "-------- @name = #{@name}"
     @type = cloth[1].chomp
+    # puts "-------- @type = #{@type}"
     @temperature_range = convert_to_range(cloth[2].chomp)
+    # puts "-------- @temperature_range = #{@temperature_range}"
   end
   # Превращаем прочтенную из файла строку в диапазон
   def convert_to_range(temperature_string)
@@ -25,3 +28,4 @@ class Cloth
   end
 
 end
+

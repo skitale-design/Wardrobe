@@ -8,21 +8,19 @@ if (Gem.win_platform?)
   end
 end
 # /XXX
-
 require_relative 'lib/clothes'
 
 path_to_data = "./data"
-# Для выхода из цикла набрать "111"
-loop do
+loop do # Цикл для удобства тестирования - для выхода набрать "111"
   puts "Для выхода из цикла набрать \"111\""
   print "Сейчас градусов на улице: "
   user_input = STDIN.gets.to_i
   # Создаем экземпляр класса "Clothes"
-  cloth = Clothes.new(user_input, path_to_data)
+  clothes = Clothes.new(user_input, path_to_data)
   puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
-  puts "Головной убор: #{cloth.hats.sample}"
-  puts "Одежда: #{cloth.overclothes.sample}"
-  puts "Обувь: #{cloth.shoes.sample}"
-  puts
+  clothes.type_list.each do |item|
+      puts "#{item}: #{clothes.random_cloth_by(item).name}"
+  end
+  puts "\n---------------------"
   break if user_input == 111
 end
