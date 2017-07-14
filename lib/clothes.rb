@@ -9,10 +9,10 @@ attr_reader :type_list
     @wardrobe = []
     @fits_the_weather = []
     @appropriate_types = []
-    read_from_files(path)
+    read_from_file(path)
     select_for_temperature(temperature)
     # Пересечение множества всех типов оджеды с множеством подходящих типов оджеды
-    @type_list = type_list_method & @appropriate_types
+    @type_list = list_of_types & @appropriate_types
   end
 
   # Выбираем подходящую под температуру одежду
@@ -21,39 +21,32 @@ attr_reader :type_list
         if item.fits?(temperature)
           # Если вещь подходит к погоде, то положим ее в массив подходящих вещей
           @fits_the_weather << item
+          # Соберем массив из типов подходящих вещей
           @appropriate_types << item.type
         end
       end
   end
 
   # Список всех типов, которые вообще встречаются (строка 2 в txt-файле)
-  def type_list_method
-    type_array = []
-    # Перебираем весь шкаф
-    @wardrobe.each do |item|
-      # складываем типы вещей в массив
-      type_array << item.type
-    end
-    # Оставляем в списке вещей только уникальные названия
-    return type_array.uniq
+  def list_of_types
+    # "У каждого элемента массива @wardrobe возьми тип
+    # и выбери из них только уникальные элементы"
+    @wardrobe.map { |item| item.type }.uniq
   end
 
   # Получить случайный элемент одежды указанного типа
   def random_cloth(type)
-    cloth_array = []
-    @fits_the_weather.each do |item|
-      cloth_array << item if item.type == type
-    end
-    return cloth_array.sample
+    # "Выбери из @fits_the_weather только элементы указанного типа, а потом возьми случайный
+    @fits_the_weather.select { |item| item.type == type }.sample
   end
 
-  def read_from_files(path)
+  def read_from_file(path)
       # Перебираем каждый txt-файл в папке с путем "path"
     Dir.glob("#{path}/*.txt") do |file|
       # Проверка, что в файле есть текст
-      if !File.zero?(file)
+      unless File.zero?(file)
         # для каждого файла создаем отдельный экземпляр класса Cloth
-        cloth = Cloth.new(file)
+        cloth = Cloth.read_from_file(file)
         # Добавляем в массив одежды новую шмотку:
         @wardrobe << cloth
       end

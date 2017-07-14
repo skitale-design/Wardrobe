@@ -1,30 +1,32 @@
 class Cloth
   attr_reader :name, :type, :temperature_range
 
-  def initialize(path)
-    read_from_files(path)
+  def initialize(name, type, temperature_range)
+    @name = name
+    @type = type
+    @temperature_range = convert_to_range(temperature_range)
   end
 
-# Читаем из файл данные шмотки
-  def read_from_files(path)
+  # МЕТОД КЛАССА Cloth (ключевое слово "self.")  - может быть вызван так же как Cloth.new()
+  def self.read_from_file(path)
     cloth = []
+    # Читаем из файл данные шмотки
     file = File.new(path, "r:UTF-8")
     cloth = file.readlines
     file.close
-    @name = cloth[0].chomp
-    @type = cloth[1].chomp
-    @temperature_range = convert_to_range(cloth[2].chomp)
+    # "Вызови метод initialize с параметрами cloth[0].chomp, cloth[1].chomp, cloth[2].chomp"
+    new(cloth[0].chomp, cloth[1].chomp, cloth[2].chomp)
   end
 
   # Превращаем прочтенную из файла строку в диапазон чисел
   def convert_to_range(temperature_string)
     temperature_array = temperature_string.gsub(/[( )]/,'').split(',')
-    range = temperature_array[0].to_i..temperature_array[1].to_i
+    temperature_array[0].to_i..temperature_array[1].to_i
   end
 
   # Проверка подходит ли данная одежда для введенной погоды
   def fits?(temperature)
-    @temperature_range.include?(temperature.to_i)
+    @temperature_range.include?(temperature)
   end
 end
 
