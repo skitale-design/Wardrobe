@@ -1,9 +1,6 @@
-# Мы будем создавать экземпляры класса Cloth, для этого подключаем его
-require_relative 'cloth'
-
 class Clothes
 # Автоматом создаем геттеры для переменных
-attr_reader :type_list
+  attr_reader :type_list, :wardrobe
 
   def initialize(temperature, path)
     @wardrobe = []
@@ -13,18 +10,25 @@ attr_reader :type_list
     select_for_temperature(temperature)
     # Пересечение множества всех типов оджеды с множеством подходящих типов оджеды
     @type_list = list_of_types & @appropriate_types
+    # puts "--- > @wardrobe = #{@wardrobe}"
+    # puts "--- > @fits_the_weather = #{@fits_the_weather}"
+    # puts "--- > @appropriate_types = #{@appropriate_types}"
   end
 
   # Выбираем подходящую под температуру одежду
   def select_for_temperature(temperature)
+      # puts "****--- > @wardrobe = #{@wardrobe}"
       @wardrobe.each do |item|
-        if item.fits?(temperature)
-          # Если вещь подходит к погоде, то положим ее в массив подходящих вещей
-          @fits_the_weather << item
-          # Соберем массив из типов подходящих вещей
-          @appropriate_types << item.type
-        end
+      if item.fits?(temperature)
+        # Если вещь подходит к погоде, то положим ее в массив подходящих вещей
+        # puts "---> @item.type = #{@item.type}"
+        @fits_the_weather << item
+        # Соберем массив из типов подходящих вещей
+        @appropriate_types << item.type
       end
+    end
+    # puts "---> @fits_the_weather = #{@fits_the_weather}"
+    # puts "---> @appropriate_types = #{@appropriate_types}"
   end
 
   # Список всех типов, которые вообще встречаются (строка 2 в txt-файле)
@@ -41,7 +45,7 @@ attr_reader :type_list
   end
 
   def read_from_file(path)
-      # Перебираем каждый txt-файл в папке с путем "path"
+    # Перебираем каждый txt-файл в папке с путем "path"
     Dir.glob("#{path}/*.txt") do |file|
       # Проверка, что в файле есть текст
       unless File.zero?(file)

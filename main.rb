@@ -10,6 +10,8 @@ end
 # /XXX ------------------------------
 
 require_relative 'lib/clothes'
+require_relative 'lib/cloth'
+
 
 path_to_data = "./data"
 loop do # Цикл для удобства тестирования - для выхода набрать "111"
@@ -21,7 +23,7 @@ loop do # Цикл для удобства тестирования - для в�
   temperature = user_input.to_i
   # Создаем экземпляр класса "Clothes" и передаем ему температуру и путь к файлам
   clothes = Clothes.new(temperature, path_to_data)
-
+  # clothes.select_for_temperature(temperature)
   puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
   clothes.type_list.each do |item|
       puts "#{item}: #{clothes.random_cloth(item).name}  (#{clothes.random_cloth(item).temperature_range})"
