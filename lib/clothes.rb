@@ -1,41 +1,25 @@
 class Clothes
 # Автоматом создаем геттеры для переменных
-  attr_reader :type_list, :wardrobe
+  attr_reader :type_list
 
-  def initialize(temperature, path)
+  # def initialize(temperature, path)
+  def initialize(path)
     @wardrobe = []
     @fits_the_weather = []
-    @appropriate_types = []
     read_from_file(path)
-    select_for_temperature(temperature)
-    # Пересечение множества всех типов оджеды с множеством подходящих типов оджеды
-    @type_list = list_of_types & @appropriate_types
-    # puts "--- > @wardrobe = #{@wardrobe}"
-    # puts "--- > @fits_the_weather = #{@fits_the_weather}"
-    # puts "--- > @appropriate_types = #{@appropriate_types}"
   end
 
   # Выбираем подходящую под температуру одежду
   def select_for_temperature(temperature)
-      # puts "****--- > @wardrobe = #{@wardrobe}"
-      @wardrobe.each do |item|
+    appropriate_types = []
+    @wardrobe.each do |item|
       if item.fits?(temperature)
-        # Если вещь подходит к погоде, то положим ее в массив подходящих вещей
-        # puts "---> @item.type = #{@item.type}"
         @fits_the_weather << item
         # Соберем массив из типов подходящих вещей
-        @appropriate_types << item.type
+        appropriate_types << item.type
       end
     end
-    # puts "---> @fits_the_weather = #{@fits_the_weather}"
-    # puts "---> @appropriate_types = #{@appropriate_types}"
-  end
-
-  # Список всех типов, которые вообще встречаются (строка 2 в txt-файле)
-  def list_of_types
-    # "У каждого элемента массива @wardrobe возьми тип
-    # и выбери из них только уникальные элементы"
-    @wardrobe.map { |item| item.type }.uniq
+    @type_list = appropriate_types.uniq
   end
 
   # Получить случайный элемент одежды указанного типа

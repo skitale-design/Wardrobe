@@ -8,24 +8,23 @@ if (Gem.win_platform?)
   end
 end
 # /XXX ------------------------------
-
 require_relative 'lib/clothes'
 require_relative 'lib/cloth'
-
 
 path_to_data = "./data"
 loop do # Цикл для удобства тестирования - для выхода набрать "111"
   puts "Для выхода из цикла набрать \"q\""
+
   print "Сейчас градусов на улице: "
   user_input = STDIN.gets.chomp
   break if user_input == "q"
-  # Для наглядности тут конвертим ввод пользователя в число:
   temperature = user_input.to_i
-  # Создаем экземпляр класса "Clothes" и передаем ему температуру и путь к файлам
-  clothes = Clothes.new(temperature, path_to_data)
-  # clothes.select_for_temperature(temperature)
+
+  clothes = Clothes.new(path_to_data)
+
   puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
-  clothes.type_list.each do |item|
+
+  clothes.select_for_temperature(temperature).each do |item|
       puts "#{item}: #{clothes.random_cloth(item).name}  (#{clothes.random_cloth(item).temperature_range})"
   end
   puts "\n---------------------"
