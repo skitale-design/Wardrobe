@@ -26,7 +26,8 @@ loop do # Цикл для удобства тестирования - для в�
   puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
 
   clothes.select_for_temperature(temperature).each do |item|
-      puts "#{item}: #{clothes.random_cloth(item).name}  (#{clothes.random_cloth(item).temperature_range})"
+      puts "#{item}: #{clothes.random_cloth(item).name}"\
+      "  (#{clothes.random_cloth(item).temperature_range})"
   end
   puts "\n---------------------"
 end
