@@ -13,24 +13,15 @@ require_relative 'lib/cloth'
 
 path_to_data = "./data"
 
-loop do # Цикл для удобства тестирования - для выхода набрать "111"
+loop do # Цикл для удобства тестирования - для выхода набрать "q"
   puts "Для выхода из цикла набрать \"q\""
 
   print "Сейчас градусов на улице: "
   user_input = STDIN.gets.chomp
   break if user_input == "q"
-<<<<<<< HEAD
   temperature = user_input.to_i
 
   clothes = Clothes.new(path_to_data)
-=======
-  
-  # Для наглядности тут конвертим ввод пользователя в число:
-  temperature = user_input.to_i
-  
-  # Создаем экземпляр класса "Clothes" и передаем ему температуру и путь к файлам
-  clothes = Clothes.new(temperature, path_to_data)
->>>>>>> 16fd00111d278ccb2c51f311a560169969539278
 
   puts "\n\nГрадусов за окном: #{user_input} Предлагаю надеть:\n\n"
 

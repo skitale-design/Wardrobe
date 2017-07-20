@@ -2,7 +2,6 @@ class Clothes
 # Автоматом создаем геттеры для переменных
   attr_reader :type_list
 
-  # def initialize(temperature, path)
   def initialize(path)
     @wardrobe = []
     @fits_the_weather = []
@@ -15,14 +14,12 @@ class Clothes
     @wardrobe.each do |item|
       if item.fits?(temperature)
         @fits_the_weather << item
-        # Соберем массив из типов подходящих вещей
         appropriate_types << item.type
       end
     end
     @type_list = appropriate_types.uniq
   end
 
-  # Получить случайный элемент одежды указанного типа
   def random_cloth(type)
     # "Выбери из @fits_the_weather только элементы указанного типа, а потом возьми случайный
     @fits_the_weather.select { |item| item.type == type }.sample
